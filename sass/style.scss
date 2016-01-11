@@ -1,5 +1,157 @@
 @import 'color';
-
+@import 'font';
+@import 'grid/susy';
+@import 'grid/breakpoint';
+@import 'grid';
+img{
+  max-width: 100%;
+  height: auto;
+}
 body{
-  background: $primaryColor;
+  background: $offWhite;
+  font-family: $fontStack;
+  font-size: 15px;
+  font-weight: normal;
+}
+p{
+  font-size: $bodySize;
+  color: $textColor;
+  font-weight: 300;
+}
+
+//Fonts
+
+
+
+
+
+@mixin tabs(){
+  border-bottom: 1px solid $textColor;
+  padding: 0;
+  li{
+    a{
+      text-decoration: none;
+      background: $textColor;
+      color: #fff;
+      padding: 5px 15px;
+      display: inline-block;
+      border-radius: 0;
+      border: none;
+      font-weight: 300;
+      &.is-active{
+        border-left: 2px solid $brightPrimary;
+      }
+    }
+  }
+}
+ul.tabs{
+  @include tabs();
+}
+
+@mixin buttons(){
+  border: $primaryColor 1px solid;
+  border-radius: 3px;
+  background: $textColor;
+  color: #fff;
+  padding: 5px 15px;
+  font-weight: 400;
+
+  &:hover{
+    border-color: $brightPrimary;
+  }
+}
+input[type="submit"]{
+  @include buttons();
+}
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  padding-top: ($height / $width) * 100%;
+  overflow: hidden;
+  img{
+    position: absolute;
+    display: block;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+}
+
+
+
+.front-recent{
+  .views-row{
+    padding-bottom: $containerpadding;
+    .views-field{
+      padding: 0 $containerpadding;
+    }
+    .views-field-field-image{
+      .field-content{
+        @include  aspect-ratio(3,2);
+      }
+    }
+    .views-field-body{
+      p{
+        margin:0;
+      }
+    }
+    .views-field-title{
+      padding-top: $containerpadding;
+      a{
+        color:$textColor;
+        text-decoration: none;
+        font-size: $smallHeadingSize;
+        font-weight: 600;
+      }
+    }
+    .views-field-created{
+      span{
+        color:$textColor;
+        text-decoration: none;
+        font-size: $detailSize;
+      }
+    }
+    &:nth-child(2){
+      @include span(12);
+      .views-field-field-image{
+        @include span(9);
+      }
+      .views-field-title{
+        a{
+          font-size: $medHeadingSize;
+        }
+      }
+    }
+    &:nth-child(n+3){
+      @include span(4);
+
+    }
+  }
+}
+form{
+  .form-item{
+    margin-bottom: 1em;
+    .form-text{
+      border: 1px $textColor solid;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+    label{
+      display: block;
+      font-size: $smallHeadingSize;
+    }
+    .description{
+      font-size: $detailSize;
+    }
+  }
+}
+
+.container{
+  padding: $containerpadding;
 }
